@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TodoAPP</string>
+    <string name="hintTituloTarea">Titulo de la tarea</string>
+    <string name="hintDescripcion">Descripción</string>
+    <string name="hintHora">Hora Inicio</string>
+    <string name="textoAgregar">Agregar</string>
+    <string name="textoSalir">Salir</string>
+    <string name="textoVolver">Volver</string>
+
+</resources>
