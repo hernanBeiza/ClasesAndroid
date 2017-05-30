@@ -22,5 +22,5 @@ Les dejo aquí mis ejemplos de las clases de Android que hemos tenido en la UGM 
 ### MisAmigos
 
 * Nuestra aplicación de **Administración de Contactos**. En esta clase vimos como conectarnos a una base de datos local **SQLite**
-* En este momento guarda los datos en la base y los obtiene para mostrarlos en la lista
-* Falta actualizar y borrar un contacto
+* En este momento guarda los datos en la base,los obtiene para mostrarlos en la lista y edita un contacto
+* Falta borrar un contacto
