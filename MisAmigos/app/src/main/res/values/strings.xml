@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MisAmigos</string>
+    <string name="hintNombre">Nombre del usuario</string>
+    <string name="ingresarButton">Ingresar</string>
+    <string name="amigoHint">Nombre del Amigo</string>
+    <string name="telefonoHint">Teléfono</string>
+    <string name="cumpleanosHint">Cumpleaños del Amigo</string>
+    <string name="guardarButton">Guardar</string>
+    <string name="agregarButton">Agregar amigo</string>
+</resources>
