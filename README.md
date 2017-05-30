@@ -18,3 +18,9 @@ Les dejo aquí mis ejemplos de las clases de Android que hemos tenido en la UGM 
 	* Tap en los elementos de la lista e ir a ver el detalle en un layout nuevo (**DetalleActivity**)
 	* Tap largo en los elementos de la lista
 	* Eliminar un elemento de la lista
+	
+### TodoAPP
+
+* Nuestra aplicación de **Administración de Contactos**. En esta clase vimos como conectarnos a una base de datos local **SQLite**
+* En este momento guarda los datos en la base y los obtiene para mostrarlos en la lista
+* Falta actualizar y borrar un contacto
