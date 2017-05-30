@@ -1,4 +1,7 @@
 <resources>
+    <string name="sp">MisAmigos</string>
+    <string name="idamigo">idamigo</string>
+
     <string name="app_name">MisAmigos</string>
     <string name="hintNombre">Nombre del usuario</string>
     <string name="ingresarButton">Ingresar</string>
@@ -7,4 +10,5 @@
     <string name="cumpleanosHint">Cumpleaños del Amigo</string>
     <string name="guardarButton">Guardar</string>
     <string name="agregarButton">Agregar amigo</string>
+    <string name="actualizarButton">Actualizar</string>
 </resources>

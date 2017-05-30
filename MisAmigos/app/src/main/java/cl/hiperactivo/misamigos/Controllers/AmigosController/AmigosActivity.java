@@ -1,14 +1,17 @@
 package cl.hiperactivo.misamigos.Controllers.AmigosController;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import cl.hiperactivo.misamigos.Controllers.ActualizarController.ActualizarActivity;
 import cl.hiperactivo.misamigos.Controllers.AgregarController.AgregarActivity;
 import cl.hiperactivo.misamigos.DAO.AmigosOpenHelper;
 import cl.hiperactivo.misamigos.Modelo.AmigoModel;
@@ -41,18 +44,32 @@ public class AmigosActivity extends AppCompatActivity {
     }
 
     private void cargarAmigos() {
-        Log.d(tag,"cargarAmigos");
+        Log.d(tag, "cargarAmigos");
         AmigosOpenHelper amigosOpenHelper = new AmigosOpenHelper(getApplicationContext());
         //amigos = new ArrayList<AmigoModel>();
         amigos = amigosOpenHelper.obtenerAmigos();
-        for (AmigoModel amigo: amigos){
-            Log.d(tag,amigo.toString());
+        for (AmigoModel amigo : amigos) {
+            Log.d(tag, amigo.toString());
         }
 
-        final AmigosAdapter adapter = new AmigosAdapter(this,R.layout.layout_amigo,amigos);
-        ListView amigosListView = (ListView)findViewById(R.id.amigosListView);
+        final AmigosAdapter adapter = new AmigosAdapter(this, R.layout.layout_amigo, amigos);
+        ListView amigosListView = (ListView) findViewById(R.id.amigosListView);
         amigosListView.setAdapter(adapter);
 
+        amigosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Log.d(tag, "onItemClick " + position);
+                AmigoModel amigo = (AmigoModel) amigos.get(position);
+                Log.d(tag, amigo.toString());
+                SharedPreferences sp = getSharedPreferences(getString(R.string.sp),MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt(getString(R.string.idamigo),amigo.getId());
+                editor.commit();
+
+                Intent intent = new Intent(getApplicationContext(), ActualizarActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

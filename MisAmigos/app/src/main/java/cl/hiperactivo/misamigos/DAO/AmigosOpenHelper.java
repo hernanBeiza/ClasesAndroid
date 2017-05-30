@@ -109,10 +109,53 @@ public class AmigosOpenHelper extends SQLiteOpenHelper {
     }
 
     public void cambiarAmigo(AmigoModel amigo){
-        Log.w(tag,"cambiarAmigo sin implementar");
+        Log.w(tag,"cambiarAmigo");
+        //Obtenemos una database pero con permiso de escritura, para poder agregar dato
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Objeto que permite guardar pares ordenados
+        ContentValues values = new ContentValues();
+        values.put("idamigo",amigo.getId());
+        values.put("nombre",amigo.getNombre());
+        values.put("telefono",amigo.getTelefono());
+        values.put("cumpleanos",amigo.getCumpleanos());
 
+        String[] whereString = {String.valueOf(amigo.getId())};
+
+        db.update("amigos",values,"idamigo=?",whereString);
+        db.close();
     }
 
+    public AmigoModel obtenerAmigo(AmigoModel elAmigo){
+        SQLiteDatabase db = getReadableDatabase();
+        //Se puede ocupar algo similar a ContentValues
+        //Con un arreglo de string, se puede decir a la db QUË DATOS sacaré de ella
+        String[] columnas = {"idamigo","nombre","telefono","cumpleanos"};
+        //Finalmente permite armar el query usando parámetros
+        String[] whereString = {String.valueOf(elAmigo.getId())};
+        Cursor c = db.query("amigos", columnas, "idamigo=?", whereString, null, null, null);
+        //Ojo tener en cuenta con la APIVersion. SQLite va cambiando según el APIVersion
+        if(c!=null){
+            //Si tengo datos
+            if(c.moveToFirst()){
+                Log.d(tag,"¡Datos encontrados!");
+                do {
+                    //debo reconocer las columnas
+                    //nos permite trabajar con el tipo de dato directamente con el tipo que necesito
+                    //no es necesario usar cast
+                    AmigoModel amigo = new AmigoModel(c.getInt(0),c.getString(1),c.getString(2),c.getString(3));
+                    return amigo;
+                } while (c.moveToNext());
+            } else {
+                //no tengo datos en mi cursor
+                Log.d(tag,"No tengo datos");
+                return null;
+            }
+        } else {
+            //Está vacío, no encotró la tabla,, etc
+            Log.d(tag,"Error");
+            return null;
+        }
+    }
     public void borrarAmigo(AmigoModel amigo){
         Log.w(tag,"borrarAmigo sin implementar");
     }

@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".Controllers.AmigosController.AmigosActivity" />
         <activity android:name=".Controllers.AgregarController.AgregarActivity"></activity>
+        <activity android:name=".Controllers.ActualizarController.ActualizarActivity"></activity>
     </application>
 
 </manifest>
