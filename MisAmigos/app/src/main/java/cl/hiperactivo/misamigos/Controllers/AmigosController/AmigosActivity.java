@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import cl.hiperactivo.misamigos.Controllers.ActualizarController.ActualizarActivity;
 import cl.hiperactivo.misamigos.Controllers.AgregarController.AgregarActivity;
+import cl.hiperactivo.misamigos.DAO.AmigosDAO;
 import cl.hiperactivo.misamigos.DAO.AmigosOpenHelper;
 import cl.hiperactivo.misamigos.Modelo.AmigoModel;
 import cl.hiperactivo.misamigos.R;
@@ -27,6 +28,7 @@ public class AmigosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amigos);
         Log.d(tag,"onCreate");
+
         this.cargarAmigos();
     }
 
@@ -45,15 +47,19 @@ public class AmigosActivity extends AppCompatActivity {
 
     private void cargarAmigos() {
         Log.d(tag, "cargarAmigos");
+
         AmigosOpenHelper amigosOpenHelper = new AmigosOpenHelper(getApplicationContext());
         //amigos = new ArrayList<AmigoModel>();
         amigos = amigosOpenHelper.obtenerAmigos();
-        for (AmigoModel amigo : amigos) {
-            Log.d(tag, amigo.toString());
-        }
 
         final AmigosAdapter adapter = new AmigosAdapter(this, R.layout.layout_amigo, amigos);
         ListView amigosListView = (ListView) findViewById(R.id.amigosListView);
+
+        //Cargar amigos desde el JSON en INternet
+        /*
+        AmigosDAO dao = new AmigosDAO(getApplicationContext(),amigosListView,amigosOpenHelper);
+        dao.ejecutar();
+        */
         amigosListView.setAdapter(adapter);
 
         amigosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,6 +76,7 @@ public class AmigosActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 }

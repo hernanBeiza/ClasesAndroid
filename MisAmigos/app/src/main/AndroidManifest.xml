@@ -20,5 +20,6 @@
         <activity android:name=".Controllers.AgregarController.AgregarActivity"></activity>
         <activity android:name=".Controllers.ActualizarController.ActualizarActivity"></activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

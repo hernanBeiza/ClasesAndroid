@@ -64,9 +64,11 @@ public class AmigosOpenHelper extends SQLiteOpenHelper {
         values.put("nombre",amigo.getNombre());
         values.put("telefono",amigo.getTelefono());
         values.put("cumpleanos",amigo.getCumpleanos());
-        //El insert se crea en base al ContentValues
-        //Cualquier valor nulo, se pone como null
-        //El insert se crea solo :)
+        // El insert se crea en base al ContentValues
+        // Cualquier valor nulo, se pone como null
+        // El insert se crea solo :)
+        // Por hacer
+        // Revisar si exsite antes un amigo con este ID
         db.insert("amigos",null,values);
         db.close();
     }
@@ -108,7 +110,7 @@ public class AmigosOpenHelper extends SQLiteOpenHelper {
         return amigos;
     }
 
-    public void cambiarAmigo(AmigoModel amigo){
+    public boolean cambiarAmigo(AmigoModel amigo){
         Log.w(tag,"cambiarAmigo");
         //Obtenemos una database pero con permiso de escritura, para poder agregar dato
         SQLiteDatabase db = this.getWritableDatabase();
@@ -123,6 +125,8 @@ public class AmigosOpenHelper extends SQLiteOpenHelper {
 
         db.update("amigos",values,"idamigo=?",whereString);
         db.close();
+        //Ver como detectar si existe un error o algo para retornar un false
+        return true;
     }
 
     public AmigoModel obtenerAmigo(AmigoModel elAmigo){

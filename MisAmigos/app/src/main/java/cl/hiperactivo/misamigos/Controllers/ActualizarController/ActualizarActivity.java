@@ -3,6 +3,7 @@ package cl.hiperactivo.misamigos.Controllers.ActualizarController;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -41,27 +42,30 @@ public class ActualizarActivity extends AppCompatActivity {
         //Estamos manejando el id a nivel de controlador, debería ser en base de datos
         //Si no hay id, debo retornar 1, porque significa que es el primero
         int idamigo = sp.getInt(getString(R.string.idamigo),-1);
-        //Log.d(tag,String.valueOf(idamigo));
+        Log.d(tag,String.valueOf(idamigo));
         amigosOpenHelper = new AmigosOpenHelper(getApplicationContext());
         AmigoModel amigo = new AmigoModel(idamigo,null,null,null);
-
         this.amigoModel = amigosOpenHelper.obtenerAmigo(amigo);
-
-        nombreEditText.setText(amigoModel.getNombre());
-        telefonoEditText.setText(amigoModel.getTelefono());
-        cumpleanosEditText.setText(amigoModel.getCumpleanos());
+        if(this.amigoModel!=null){
+            Log.d(tag,this.amigoModel.toString());
+            nombreEditText.setText(amigoModel.getNombre());
+            telefonoEditText.setText(amigoModel.getTelefono());
+            cumpleanosEditText.setText(amigoModel.getCumpleanos());
+        }
     }
 
 
     public void onActualizar(View v){
-
+        Log.d(tag,"Actualizar: Sin Implementar");
         String nombre = nombreEditText.getText().toString();
         String telefono = telefonoEditText.getText().toString();
         String cumpleanos = cumpleanosEditText.getText().toString();
 
         AmigoModel amigo = new AmigoModel(this.amigoModel.getId(),nombre,telefono,cumpleanos);
-        this.amigosOpenHelper.cambiarAmigo(amigo);
+        if(this.amigosOpenHelper.cambiarAmigo(amigo)){
 
-        this.finish();
+            this.finish();
+
+        }
     }
 }
